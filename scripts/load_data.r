@@ -58,20 +58,21 @@ trim.data <- function(rawdata) {
   }
 
   # Stratify
-  mymin <- min(rawdata$author_date)
-  strata_size <- 60 * 60 * 24 * (365.25/STRATA_PER_YEAR) # Yearly quarters
-  rawdata$strata <- factor(floor((rawdata$author_date - mymin) / strata_size))
+  # mymin <- min(rawdata$author_date)
+  # strata_size <- 60 * 60 * 24 * (365.25/STRATA_PER_YEAR) # Yearly quarters
+  # rawdata$strata <- factor(floor((rawdata$author_date - mymin) / strata_size))
+  rawdata$strata <- factor(0)
 
-	return(rawdata)
+  return(rawdata)
 }
 
 # Label all of the variables for pretty plotting
 label.data <- function(trimdata) {
   label(trimdata$commit_id) <- "Commit SHA"
-	label(trimdata$buggy) <- "Defect-inducing"
+  label(trimdata$buggy) <- "Defect-inducing"
 
   # Purpose
-	label(trimdata$fix) <- "Defect-fixing"
+  label(trimdata$fix) <- "Defect-fixing"
 
   # Size
   label(trimdata$la) <- "Lines added"
@@ -89,23 +90,23 @@ label.data <- function(trimdata) {
   label(trimdata$rtime) <- "Review timespan"
   label(trimdata$nrev) <- "Review revisions"
   label(trimdata$app) <- "Reviewers"
-	label(trimdata$self) <- "Self approval"
+  label(trimdata$self) <- "Self approval"
 
   # History
-	label(trimdata$ndev) <- "Number of past developers"
-	label(trimdata$age) <- "Time since last modification"
-	label(trimdata$nuc) <- "Number of past changes"
+  label(trimdata$ndev) <- "Number of past developers"
+  label(trimdata$age) <- "Time since last modification"
+  label(trimdata$nuc) <- "Number of past changes"
 
   # Experience
-	label(trimdata$aexp) <- "Author experience"
-	label(trimdata$arexp) <- "Relative author experience"
-	label(trimdata$asexp) <- "Subsystem author experience"
-	label(trimdata$rexp) <- "Reviewer experience"
-	label(trimdata$rrexp) <- "Relative reviewer experience"
-	label(trimdata$rsexp) <- "Subsystem reviewer experience"
+  label(trimdata$aexp) <- "Author experience"
+  label(trimdata$arexp) <- "Relative author experience"
+  label(trimdata$asexp) <- "Subsystem author experience"
+  label(trimdata$rexp) <- "Reviewer experience"
+  label(trimdata$rrexp) <- "Relative reviewer experience"
+  label(trimdata$rsexp) <- "Subsystem reviewer experience"
   label(trimdata$oexp) <- "Overall experience"
-	label(trimdata$orexp) <- "Relative overall experience"
-	label(trimdata$osexp) <- "Subsystem overall experience"
+  label(trimdata$orexp) <- "Relative overall experience"
+  label(trimdata$osexp) <- "Subsystem overall experience"
 
   # Awareness
   label(trimdata$asawr) <- "Author awareness"
@@ -118,12 +119,17 @@ label.data <- function(trimdata) {
 # Load some rawdata
 # Proj must be one of the above listed projects
 load.data <- function() {
-	rawdata <- read.csv(paste("data/", PROJECT_NAME, ".csv", sep=""))
+  # train <- read.csv(paste("data/", PROJECT_NAME, ".csv", sep=""))
+  train <- read.csv(paste("data/", 'alltrain', ".csv", sep=""))
+  test <- read.csv(paste("data/", 'alltest', ".csv", sep=""))
 
   # Preliminary clean-up
-	trimdata <- trim.data(rawdata)
+  trimtrain <- trim.data(train)
+  trimtest <- trim.data(test)
 
-  jitdata <- label.data(trimdata)
+  traindata <- label.data(trimtrain)
+  testdata <- label.data(trimtest)
 
-	return(jitdata)
+  datalist <- list("train" = traindata, "test" = testdata)
+  return(datalist)
 }

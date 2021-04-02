@@ -12,7 +12,7 @@ produce.figs <- function() {
                         "pdf", sep= ".")
   
   # Load, filter, and stratify project_name data
-  jitdata <- load.data() 
+  datalist <- load.data()
 
   # Fit a series of models to the JIT data
   ##############################################################################
@@ -20,7 +20,7 @@ produce.figs <- function() {
   # If you do extend this work in the future, please perform some form of feature
   # reduction before fitting (if the fit function expects it)
   ##############################################################################
-  modelfits <- fit.models(jitdata)
+  modelfits <- fit.models(datalist)
 
   #
   # Build performance figures

@@ -24,6 +24,19 @@ model.perf.over.time <- function(modelfits) {
     metric_type <- append(metric_type, c("Brier", "AUC", "Brier", "AUC"))
     fit_type <- append(fit_type, c("Short-period", "Short-period", "Long-period", "Long-period"))
 
+    testdata <- modelfits[[trainperiod]]$test
+    # Add Brier and AUC values
+    for (m in list(mlocal, mall)) {
+      value <- append(value, brier(m, testdata))
+      value <- append(value, auc(m, testdata))
+    }
+
+    train_period <- append(train_period, rep(trainperiod, times=4))
+    test_period <- append(test_period, rep(trainperiod, times=4))
+    metric_type <- append(metric_type, c("Brier", "AUC", "Brier", "AUC"))
+    fit_type <- append(fit_type, c("Short-period", "Short-period",
+                                   "Long-period", "Long-period"))
+
     if (trainperiod == length(modelfits)) {
       next
     }
@@ -57,6 +70,7 @@ model.perf.over.time <- function(modelfits) {
 do_perf_fig <- function(figure_fname, modelfits) {
 
   jitdata <- model.perf.over.time(modelfits)
+  print(jitdata)
 
   for (met in c("AUC", "Brier")) {
     do_sub_perf_fig(subset(jitdata, metric_type == met), met,

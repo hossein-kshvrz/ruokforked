@@ -1,0 +1,9 @@
+  train_period test_period metric_type     fit_type     value
+1            1           1       Brier Short-period 0.1117093
+2            1           1         AUC Short-period 0.7645308
+3            1           1       Brier  Long-period 0.1117093
+4            1           1         AUC  Long-period 0.7645308
+5            1           1       Brier Short-period 0.1340829
+6            1           1         AUC Short-period 0.7120471
+7            1           1       Brier  Long-period 0.1340829
+8            1           1         AUC  Long-period 0.7120471

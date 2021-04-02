@@ -13,14 +13,15 @@ CHURN_THRESH <- 10000
 #
 # Select a project
 #
-PROJECT_NAME <- "qt"
-# PROJECT_NAME <- "openstack"
+# PROJECT_NAME <- "qt"
+PROJECT_NAME <- "openstack"
 
 #
 # The number of strata in one year
 #
-STRATA_PER_YEAR = 4
-# STRATA_PER_YEAR = 2
+STRATA_PER_YEAR <- 1
+# STRATA_PER_YEAR = 4
+# STRATA_PER_YEAR <- 2
 
 
 #
