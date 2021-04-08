@@ -120,8 +120,8 @@ label.data <- function(trimdata) {
 # Proj must be one of the above listed projects
 load.data <- function() {
   # train <- read.csv(paste("data/", PROJECT_NAME, ".csv", sep=""))
-  train <- read.csv(paste("data/", 'alltrain', ".csv", sep=""))
-  test <- read.csv(paste("data/", 'alltest', ".csv", sep=""))
+  train <- read.csv(paste("data/", 'lowfile_train', ".csv", sep=""))
+  test <- read.csv(paste("data/", 'lowfile_test', ".csv", sep=""))
 
   # Preliminary clean-up
   trimtrain <- trim.data(train)
